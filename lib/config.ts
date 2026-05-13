@@ -9,4 +9,8 @@ export const siteConfig = {
     twitter: "https://twitter.com/example",
     github: "https://github.com/example/next-boilerplate",
   },
+  fonts: {
+    sans: "Geist",
+    mono: "Geist Mono",
+  },
 }

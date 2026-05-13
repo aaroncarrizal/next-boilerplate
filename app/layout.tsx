@@ -1,4 +1,11 @@
 import type { Metadata, Viewport } from "next"
+// ── Fonts ─────────────────────────────────────────────
+// To change fonts:
+//   1. Swap the import below with your chosen Google Font
+//   2. Update the variable name if different
+//   3. For a separate heading font, add its CSS variable
+//      to <html> className and update --font-heading in globals.css
+// ─────────────────────────────────────────────────────
 import { Geist, Geist_Mono } from "next/font/google"
 import { ThemeProvider } from "next-themes"
 
