@@ -35,7 +35,7 @@ This boilerplate includes a `business-site-builder` agent skill for scaffolding 
 
 ### Setup per client
 
-1. **`lib/business.ts`** — set the business name, services offered, contact info
+1. **`lib/business.ts`** — set the business name, services offered, contact info. Set `industry` (e.g. "bakery", "real estate") and `vibe` (e.g. "speedy, elegant, family owned") to control the generated site's look and feel.
 2. **`lib/config.ts`** — set URL, locale, OG image path
 3. **`app/globals.css`** — set brand colors (edit the Brand Palette block only)
 

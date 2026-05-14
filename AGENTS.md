@@ -130,7 +130,7 @@ This template can scaffold business website pages via the `business-site-builder
 
 ## Setup per client
 
-1. Edit `lib/business.ts` — set the business name, description, services, contact info
+1. Edit `lib/business.ts` — set the business name, description, services, contact info. Set `industry` (e.g. "bakery", "real estate") and `vibe` (e.g. "speedy, elegant, family owned") to control the generated site's look and feel.
 2. Edit `lib/config.ts` — set URL, locale, OG image path
 3. Edit `app/globals.css` — set brand colors (primary-l, primary-d, etc.)
 
