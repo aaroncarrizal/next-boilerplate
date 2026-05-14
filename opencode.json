@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "nano-banana": {
+      "type": "local",
+      "command": [
+        "bash",
+        "-c",
+        "set -a && . .env && set +a && exec npx @akashvekariya/nano-banana-mcp"
+      ],
+      "enabled": true
+    }
+  }
+}

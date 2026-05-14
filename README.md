@@ -29,6 +29,26 @@ Built for Spanish-language projects — but works for any locale.
 - **Prettier** — Consistent formatting with Tailwind class sorting
 - **ESLint** — Airbnb-inspired stylistic rules + Next.js/TypeScript best practices
 
+## AI Image Generation (Nano-Banana-MCP)
+
+This project includes config for [Nano-Banana-MCP](https://github.com/akashvekariya/Nano-Banana-MCP) — an MCP server for AI image generation/editing via Google Gemini 2.5 Flash Image.
+
+### Setup
+
+Get a free API key from [Google AI Studio](https://aistudio.google.com/app/apikey), then:
+
+1. Copy the example file:
+   ```bash
+   cp .env.example .env
+   ```
+2. Open `.env` and replace `paste-your-key-here` with your actual key.
+
+The MCP server configs auto-load `GEMINI_API_KEY` from `.env` — no manual export needed.
+
+> Never commit the API key — `.env`, other `.env*` files, and `.nano-banana-config.json` are gitignored.
+
+---
+
 ## Business Site Builder
 
 This boilerplate includes a `business-site-builder` agent skill for scaffolding business website pages one at a time. Each page is generated via conversation with the agent.
