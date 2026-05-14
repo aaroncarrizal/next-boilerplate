@@ -103,6 +103,7 @@ The `.agents/skills/` directory contains skills for:
 - **accessibility** — WCAG 2.2 compliance audits
 - **programmatic-seo** — scalable SEO page generation
 - **business-site-builder** — generating business website pages one at a time
+- **brand-generator** — generating complete brand identity (logo, palette, fonts, decorative elements)
 
 ## ESLint Config
 
@@ -133,6 +134,7 @@ This template can scaffold business website pages via the `business-site-builder
 1. Edit `lib/business.ts` — set the business name, description, services, contact info. Set `industry` (e.g. "bakery", "real estate") and `vibe` (e.g. "speedy, elegant, family owned") to control the generated site's look and feel.
 2. Edit `lib/config.ts` — set URL, locale, OG image path
 3. Edit `app/globals.css` — set brand colors (primary-l, primary-d, etc.)
+4. Run brand generation: "generate brand identity" — the agent creates a full colour palette, SVG logo, font pairing, and decorative elements
 
 The demo pages (Home, About, Contact) stay in the template as examples.
 

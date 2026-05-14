@@ -1,99 +1,85 @@
 # next-boilerplate
 
-A production-ready [Next.js](https://nextjs.org) 16 boilerplate with dark mode, shadcn/ui, SEO, and best practices baked in.
+A production-ready [Next.js](https://nextjs.org) 16 boilerplate with dark mode, shadcn/ui, SEO, and an agent-driven workflow for building branded business websites.
 
-Built for Spanish-language projects — but works for any locale.
+Built for Spanish-language projects — works for any locale.
 
-## Tech Stack
+## Quick start
 
-| Layer | Choice |
-|-------|--------|
-| Framework | Next.js 16 (App Router, Turbopack) |
-| Language | TypeScript 5 (strict) |
-| Styling | Tailwind CSS v4 |
-| UI Library | shadcn/ui (nova preset, base-ui/react primitives) |
-| Icons | lucide-react |
-| Dark mode | next-themes (class-based) |
-| Formatting | Prettier + Tailwind plugin |
-| Linting | ESLint 9 (flat config) + @stylistic (Airbnb-style) |
+```bash
+bun install
+bun dev      # → http://localhost:3000
+bun run build
+```
 
-## Features
+## Client workflow
 
-- **Dark mode** — theme toggle button, respects system preference, stores choice
-- **shadcn/ui** — Button, Card, DropdownMenu, Input, Textarea, Label, Separator, Avatar, Badge
-- **Routing** — Home (`/`), About (`/about`), Contact (`/contact`), 404 page
-- **SEO** — Open Graph, Twitter Cards, sitemap.xml, robots.txt, JSON-LD structured data, OG image generation
-- **Spanish-first** — `lang="es"`, OG locale `es_ES`
-- **API** — Health endpoint (`/api/health`)
-- **Loading states** — Suspense boundaries with loading spinners
-- **Prettier** — Consistent formatting with Tailwind class sorting
-- **ESLint** — Airbnb-inspired stylistic rules + Next.js/TypeScript best practices
+This template is designed to be cloned for each client. The agent scaffolds brand identity and pages via conversation.
 
-## Business Site Builder
+### 1. Configure
 
-This boilerplate includes a `business-site-builder` agent skill for scaffolding business website pages one at a time. Each page is generated via conversation with the agent.
+**`lib/business.ts`** — business name, services, industry, vibe:
 
-### Setup per client
+```ts
+export const businessConfig = {
+  name: "Panadería El Trigo",
+  tagline: "El pan de cada día",
+  industry: "bakery",                          // controls design direction
+  vibe: "family owned, warm, traditional",     // modifies the design
+  email: "hola@panaderiaeltrigo.com",
+  phone: "+34 91 123 45 67",
+  address: "Calle Mayor 12, Madrid",
+  services: [
+    { title: "Pan artesano", description: "Masa madre, horneado en piedra" },
+  ],
+}
+```
 
-1. **`lib/business.ts`** — set the business name, services offered, contact info. Set `industry` (e.g. "bakery", "real estate") and `vibe` (e.g. "speedy, elegant, family owned") to control the generated site's look and feel.
-2. **`lib/config.ts`** — set URL, locale, OG image path
-3. **`app/globals.css`** — set brand colors (edit the Brand Palette block only)
+**`lib/config.ts`** — URL, locale, OG image path, social links.
 
 The demo pages (Home, About, Contact) stay as examples — no need to delete them.
 
-### Workflow
+### 2. Generate brand identity
+
+> "generate brand identity"
+
+The agent reads `industry` + `vibe` and:
+
+| Step | What happens |
+|------|-------------|
+| Colour palette | Generates oklch values → writes to `app/globals.css` |
+| Font pairing | Picks display + body fonts → updates `app/layout.tsx` |
+| Logo | Asks: provide your own, generate an SVG, or skip |
+| Decorations | Creates 0-3 SVG components (blobs, waves, patterns) only if they fit the brand |
+| Brand tokens | Writes `lib/brand.ts` with all colour, font, and design token values |
+| Guidelines | Fills `docs/BRAND.md` with palette, typography, voice & tone |
+
+### 3. Generate pages
+
+> "generate a services page"
+
+Agent reads brand tokens, follows the relevant playbook, creates:
 
 ```
-"generate a services page"
+app/services/page.tsx      # Server component with metadata + content
+app/services/loading.tsx   # Suspense fallback
 ```
 
-The agent reads `lib/business.ts` for context, loads the skill, follows the relevant playbook, and creates:
+Header nav updates automatically. Repeat for each page:
 
-```
-app/services/page.tsx       # Server component with metadata + content
-app/services/loading.tsx    # Suspense fallback
-```
+> "generate an about page"
+> "add an FAQ page"    → agent asks for Q&A content
+> "add a team page"    → agent asks for team member info
 
-Then it updates `navItems` in `components/layout/Header.tsx` to include the new page.
+Every page inherits the same palette, fonts, radii, shadows, and decorative language.
 
-For content-heavy pages (FAQ, mission, pricing, testimonials, team, gallery), the agent asks you what content to include before generating.
-
-### Available playbooks
-
-| Page type | Content source |
-|-----------|---------------|
-| index | Default page from template (replace on request) |
-| about | `businessConfig.description` + user input |
-| services | `businessConfig.services` array |
-| contact | `businessConfig` contact fields |
-| mission, faq, pricing, team, testimonials, gallery | User provides content via chat |
-| *(any other)* | User describes desired content |
-
-## Getting Started
+### 4. Launch
 
 ```bash
-# Install dependencies
-bun install
-
-# Start dev server
-bun dev
-
-# Build for production
 bun run build
-
-# Start production server
-bun start
-
-# Lint
-bun run lint
-
-# Format code
-bunx prettier --write .
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
-
-## Project Structure
+## Project structure
 
 ```
 app/
@@ -101,53 +87,43 @@ app/
 ├── page.tsx              # Home page
 ├── loading.tsx           # Root loading spinner
 ├── not-found.tsx         # 404 page
-├── globals.css           # Tailwind v4 + shadcn CSS variables
+├── globals.css           # Tailwind v4 + brand colour variables
 ├── sitemap.ts            # Dynamic sitemap
 ├── robots.ts             # robots.txt
-├── opengraph-image.tsx   # Dynamic OG image (next/og)
+├── opengraph-image.tsx   # Dynamic OG image
 ├── manifest.ts           # Web app manifest
-├── about/
-│   ├── page.tsx          # About page
-│   └── loading.tsx
-├── contact/
-│   ├── page.tsx          # Contact page
-│   └── loading.tsx
-└── api/
-    └── health/
-        └── route.ts      # Health check endpoint
+├── about/                # Demo page (keep as example)
+├── contact/              # Demo page (keep as example)
+└── api/health/           # Health check endpoint
 components/
 ├── ui/                   # shadcn components (auto-generated)
-│   ├── button.tsx
-│   ├── card.tsx
-│   ├── dropdown-menu.tsx
-│   ├── input.tsx
-│   ├── textarea.tsx
-│   ├── label.tsx
-│   ├── separator.tsx
-│   ├── avatar.tsx
-│   └── badge.tsx
 └── layout/
-    ├── Header.tsx        # Navigation + theme toggle + BreadcrumbList JSON-LD
-    ├── Footer.tsx        # Footer
-    └── ThemeToggle.tsx   # Dark mode toggle button
+    ├── Header.tsx        # Navigation + theme toggle
+    ├── Footer.tsx
+    └── ThemeToggle.tsx
 lib/
-├── config.ts             # Site-wide configuration (name, URL, locale, social links)
-├── json-ld.tsx           # Structured data helpers (Organization, WebSite, Breadcrumb)
-└── utils.ts              # cn() utility class merger
+├── config.ts             # Site-wide config (name, URL, locale, socials)
+├── business.ts           # Business data (services, industry, vibe)
+├── brand.ts              # Brand tokens + image asset specs (populated by brand-generator)
+├── design-inspiration.ts # Reference URLs for the agent to analyze
+├── json-ld.tsx           # Structured data helpers
+└── utils.ts              # cn() utility
+public/
+└── images/               # Image placeholders (specs in brand.ts; add real files here)
 ```
 
-## Configuration
+## Manual reference
 
-### Site-wide settings
+### Configuration
 
-Edit `lib/config.ts` to set your project's name, URL, locale, and social links:
+**`lib/config.ts`** drives all SEO metadata, sitemap URLs, robots.txt, JSON-LD, and OG image:
 
 ```ts
 export const siteConfig = {
   name: "My Project",
   description: "A description for SEO and OG tags.",
   url: "https://mydomain.com",
-  locale: "es_ES",           // Change to your locale
+  locale: "es_ES",
   ogImage: "/opengraph-image",
   socials: {
     twitter: "https://twitter.com/myhandle",
@@ -156,11 +132,71 @@ export const siteConfig = {
 }
 ```
 
-This single file drives the root layout metadata, sitemap URLs, robots.txt, JSON-LD, and OG image. Change it once and everything updates.
+### Brand colors
 
-### Adding a new page
+Colours use the **oklch()** colour space, defined in a single Brand Palette block at the top of `app/globals.css`. Each variable has a light (`-l`) and dark (`-d`) variant:
 
-1. Create a folder under `app/`:
+```css
+:root {
+  --primary-l: oklch(0.45 0.22 265);     /* light mode */
+  --primary-fg-l: oklch(0.985 0 0);
+  --primary-d: oklch(0.65 0.18 265);     /* dark mode */
+  --primary-fg-d: oklch(0.15 0 0);
+}
+```
+
+The semantic mapping blocks below (`:root` and `.dark`) pass through these variables — never edit them. The agent (`brand-generator` skill) populates this block automatically.
+
+Semantic Tailwind utilities (`bg-primary`, `text-muted-foreground`, `border-border`, etc.) map to these variables throughout the codebase.
+
+### Fonts
+
+Default: **Geist Sans** (body) and **Geist Sans** (headings). The agent swaps these per client via `next/font/google`. To change manually, update the font imports in `app/layout.tsx` and the `<html>` className.
+
+Tailwind utilities `font-sans`, `font-mono`, `font-heading` map to the CSS variables set by your chosen fonts.
+
+### Dark mode
+
+Uses `next-themes` with class strategy. Toggle button in the header. Respects `prefers-color-scheme` on first visit, persists choice to `localStorage`. CSS variables in `:root` (light) and `.dark` (dark) handle all theming.
+
+### SEO
+
+Everything drives from `lib/config.ts`:
+
+| Feature | Implementation |
+|---------|---------------|
+| Title template | `"%s | {name}"` in root layout |
+| Open Graph | Per-page `og:title`, `og:description`, `og:image` |
+| Twitter Cards | `summary_large_image` |
+| Sitemap | Dynamic `sitemap.xml` with priorities |
+| Robots.txt | Allow all, points to sitemap |
+| OG image | 1200×630 via `next/og` |
+| Structured data | Organization, WebSite, BreadcrumbList via `lib/json-ld.tsx` |
+| Viewport | `device-width`, `initial-scale=1`, theme color |
+| Security | `Referrer-Policy: strict-origin-when-cross-origin` |
+
+### shadcn components
+
+```bash
+bunx --bun shadcn@latest add dialog select
+```
+
+Components land in `components/ui/`. Uses **base-ui/react** primitives (not Radix) — the `render` prop replaces Radix's `asChild`.
+
+### CSS utilities
+
+Available in `globals.css` for page generation:
+
+| Utility | Type | Use case |
+|---------|------|----------|
+| `.noise` | Fixed overlay | Subtle film-grain texture on entire page |
+| `.glass` / `.glass-strong` | Background | Glassmorphism cards with backdrop blur |
+| `.text-gradient` | Text color | Gradient heading text |
+| `.clip-diagonal` / `.clip-diagonal-up` | Section clip-path | Dynamic diagonal section dividers |
+| `.animate-fade-in-up` / `.animate-fade-in-left` / `.animate-scale-in` | Keyframe | Entrance animations (stagger with `.delay-{100-700}`) |
+| `.animate-float` | Keyframe | Infinite gentle float for decorative elements |
+
+### Adding a page manually
 
 ```tsx
 // app/features/page.tsx
@@ -183,183 +219,9 @@ export default function FeaturesPage() {
 }
 ```
 
-2. The title template (`%s | ${siteConfig.name}`) auto-formats the page title.
-3. Add a link in `Header.tsx` in the `navItems` array.
+Add the link to `navItems` in `components/layout/Header.tsx`. The title template (`%s | ${siteConfig.name}`) auto-formats the page title.
 
-### Adding shadcn components
-
-```bash
-bunx --bun shadcn@latest add dialog select
-```
-
-Components are placed in `components/ui/`. This boilerplate uses **base-ui/react** primitives (not Radix). The `render` prop is the base-ui equivalent of Radix's `asChild`.
-
-### Adding a dynamic route
-
-```tsx
-// app/blog/[slug]/page.tsx
-import type { Metadata } from "next"
-
-type Props = { params: Promise<{ slug: string }> }
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params     // params is async in Next.js 16
-  return { title: slug }
-}
-
-export default async function BlogPost({ params }: Props) {
-  const { slug } = await params
-  return <h1>{slug}</h1>
-}
-```
-
-## Brand Colors
-
-All colors are defined in a **single Brand Palette block** at the top of `app/globals.css`. Each variable has two variants — `-l` for light mode and `-d` for dark mode. Variables without a suffix are shared by both modes.
-
-**To re-theme the entire site**, edit just this one block:
-
-```css
-:root {
-  /* ── Primary (buttons, links, active states) ── */
-  --primary-l: oklch(0.205 0 0);         /* ← light mode color */
-  --primary-fg-l: oklch(0.985 0 0);      /* ← light mode text on primary */
-  --primary-d: oklch(0.922 0 0);         /* ← dark mode color */
-  --primary-fg-d: oklch(0.205 0 0);      /* ← dark mode text on primary */
-
-  /* ── Secondary (subtle buttons, tags) ── */
-  --secondary-l: oklch(0.97 0 0);
-  --secondary-fg-l: oklch(0.205 0 0);
-  --secondary-d: oklch(0.269 0 0);
-  --secondary-fg-d: oklch(0.985 0 0);
-  /* ... */
-}
-```
-
-The semantic mapping blocks below (`:root` light mode and `.dark` dark mode) are **mechanical pass-throughs** — they reference the brand palette variables. You never edit them.
-
-The colors use the **`oklch()` color space** — perceptually uniform at any hue. Use [oklch.com](https://oklch.com) to pick values.
-
-Every color is referenced through **semantic Tailwind utilities**:
-
-| CSS variable | Tailwind utility | Usage |
-|---|---|---|
-| `--primary` | `bg-primary` / `text-primary` | Main brand color |
-| `--primary-foreground` | `text-primary-foreground` | Text on primary bg |
-| `--secondary` | `bg-secondary` | Subtle brand |
-| `--muted` | `bg-muted` | Subdued backgrounds |
-| `--muted-foreground` | `text-muted-foreground` | Secondary text |
-| `--accent` | `bg-accent` | Highlight / hover |
-| `--destructive` | `bg-destructive` | Errors / delete actions |
-| `--border` | `border-border` | Dividers / outlines |
-| `--background` | `bg-background` | Page background |
-| `--foreground` | `text-foreground` | Default text |
-
-Before adding a custom color to a component, check if an existing semantic token fits.
-
-### Color snippets for common brands
-
-Swap these into `--primary-l` / `--primary-d` / `--primary-fg-l` / `--primary-fg-d`:
-
-| Brand | Light primary | Dark primary |
-|-------|---------------|--------------|
-| **Indigo (current)** | `oklch(0.45 0.22 265)` | `oklch(0.65 0.18 265)` |
-| Neutral | `oklch(0.205 0 0)` | `oklch(0.922 0 0)` |
-| Blue (SaaS) | `oklch(0.546 0.245 262)` | `oklch(0.8 0.1 262)` |
-| Green (finance) | `oklch(0.5 0.2 145)` | `oklch(0.8 0.1 145)` |
-| Purple (creative) | `oklch(0.48 0.22 295)` | `oklch(0.8 0.1 295)` |
-| Red (media) | `oklch(0.58 0.22 25)` | `oklch(0.8 0.1 25)` |
-| Teal (health) | `oklch(0.52 0.18 185)` | `oklch(0.8 0.1 185)` |
-
-The foreground for each brand should be a high-contrast text color:
-- Light foreground: `oklch(0.985 0 0)` (white)
-- Dark foreground: `oklch(0.15 0 0)` (near-black)
-
-## Fonts
-
-Default: **Geist Sans** for body text, **Geist Sans** for headings.
-
-**To change fonts:**
-
-1. **Swap the import** in `app/layout.tsx` at the top:
-
-```tsx
-// Replace:
-import { Geist, Geist_Mono } from "next/font/google"
-// With e.g.:
-import { Inter, JetBrains_Mono } from "next/font/google"
-
-const inter = Inter({
-  variable: "--font-sans",    // ← keeps --font-sans variable name
-  subsets: ["latin"],
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-})
-```
-
-2. **Update the JSX** in the same file:
-
-```tsx
-<html
-  className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
->
-```
-
-3. **For a separate heading font**, add another `next/font/google` import and set its variable. Then update `--font-heading` in `globals.css`:
-
-```css
-:root {
-  --font-heading: var(--font-display);  /* or whatever variable name */
-}
-```
-
-The Tailwind utilities `font-sans`, `font-mono`, and `font-heading` map to the CSS variables set by these fonts.
-
-## Dark Mode
-
-Uses `next-themes` with class-based strategy.
-
-- Toggle button in the header (sun/moon icon)
-- Respects `prefers-color-scheme` on first visit
-- Choice is persisted to `localStorage`
-- Uses `disableTransitionOnChange` to prevent flash
-
-CSS variables in `globals.css`:
-- `:root` — light theme colors
-- `.dark` — dark theme colors (applied via `.dark` class on `<html>`)
-- Tailwind's `@custom-variant dark` enables class-based `dark:` utilities
-
-## SEO
-
-Everything driven by `lib/config.ts`:
-
-| Feature | Implementation |
-|---------|---------------|
-| Title template | `"%s | {name}"` in root layout |
-| Meta description | Per-page + layout default from config |
-| Open Graph | `og:title`, `og:description`, `og:image`, `og:locale: es_ES` |
-| Twitter Cards | `summary_large_image` card |
-| Canonical URLs | Self-referencing per page |
-| Sitemap | Auto-generated `sitemap.xml` with priorities |
-| Robots.txt | `robots.ts` — allow all, points to sitemap |
-| OG Image | Dynamic 1200×630 via `next/og` (branded gradient) |
-| Structured data | Organization, WebSite (layout), BreadcrumbList (Header) |
-| Manifest | Web app manifest |
-| Viewport | `device-width`, `initial-scale=1`, theme color |
-| Security headers | `Referrer-Policy: strict-origin-when-cross-origin`, no `X-Powered-By` |
-
-To disable index on a page (e.g., admin, draft):
-
-```tsx
-export const metadata: Metadata = {
-  robots: { index: false },
-}
-```
-
-## Scripts
+### Scripts
 
 | Command | Description |
 |---------|-------------|
@@ -369,26 +231,17 @@ export const metadata: Metadata = {
 | `bun run lint` | Run ESLint |
 | `bunx prettier --write .` | Format all files |
 
-## Known Next.js 16 Differences
+## Next.js 16 differences
 
-- **`params` and `searchParams`** — always `async` in page/layout components
-- **`middleware.ts`** → renamed to **`proxy.ts`**
-- **Turbopack** — enabled by default for dev and build
-- **`next/image`** — stricter local image rules (needs `images.localPatterns`)
-- **`next lint`** removed — use `eslint` directly (already in scripts)
+- `params` and `searchParams` — always `async` in page/layout components
+- `middleware.ts` → renamed to `proxy.ts`
+- Turbopack enabled by default
+- `next/image` requires `images.localPatterns` for local images with query strings
+- `next lint` removed — use `eslint` directly (already in scripts)
 
 ## Deployment
 
-Deploy to Vercel:
-
 ```bash
-bun run build
-```
-
-Or use `output: "standalone"` in `next.config.ts` for Docker:
-
-```ts
-const nextConfig: NextConfig = {
-  output: "standalone",
-}
+bun run build                     # Vercel
+bun run build                     # Docker: set output: "standalone" in next.config.ts
 ```
