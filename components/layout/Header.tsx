@@ -11,9 +11,9 @@ import { BreadcrumbJsonLd } from "@/lib/json-ld"
 // Updated by the agent when generating new pages via the business-site-builder skill
 // Edit this array to add, remove, or reorder navigation links
 const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", label: "Inicio" },
+  { href: "/about", label: "Nosotros" },
+  { href: "/contact", label: "Contacto" },
 ]
 
 export function Header() {

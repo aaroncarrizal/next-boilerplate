@@ -14,11 +14,11 @@
  *
  *  Use oklch.com to pick values.
  *
- *  Current: Indigo blue (hue 265)
+ *  Current: Orange (hue 50) + Green (hue 145)
  *    Neutral:     oklch(0.205 0 0)            / oklch(0.922 0 0)
- *    Indigo:      oklch(0.45 0.22 265)        / oklch(0.65 0.18 265)
+ *    Orange:      oklch(0.6 0.2 50)           / oklch(0.72 0.18 50)
+ *    Green:       oklch(0.35 0.18 145)        / oklch(0.88 0.06 145)
  *    Blue:        oklch(0.546 0.245 262)      / oklch(0.8 0.1 262)
- *    Green:       oklch(0.5 0.2 145)          / oklch(0.8 0.1 145)
  *    Purple:      oklch(0.48 0.22 295)        / oklch(0.8 0.1 295)
  *    Red:         oklch(0.58 0.22 25)         / oklch(0.8 0.1 25)
  *    Teal:        oklch(0.52 0.18 185)        / oklch(0.8 0.1 185)
@@ -40,41 +40,41 @@
   --popover-d: oklch(0.205 0 0);
   --popover-fg-d: oklch(0.985 0 0);
 
-  /* ── Primary (buttons, links, active states) ── */
-  --primary-l: oklch(0.45 0.22 265);
+  /* ── Primary (buttons, links, active states) — Orange ── */
+  --primary-l: oklch(0.6 0.2 50);
   --primary-fg-l: oklch(0.985 0 0);
-  --primary-d: oklch(0.65 0.18 265);
+  --primary-d: oklch(0.72 0.18 50);
   --primary-fg-d: oklch(0.15 0 0);
 
-  /* ── Secondary (subtle buttons, tags) ── */
-  --secondary-l: oklch(0.945 0.03 265);
-  --secondary-fg-l: oklch(0.35 0.15 265);
-  --secondary-d: oklch(0.28 0.08 265);
-  --secondary-fg-d: oklch(0.92 0.03 265);
+  /* ── Secondary (subtle buttons, tags) — Green ── */
+  --secondary-l: oklch(0.92 0.06 145);
+  --secondary-fg-l: oklch(0.35 0.18 145);
+  --secondary-d: oklch(0.25 0.08 145);
+  --secondary-fg-d: oklch(0.88 0.06 145);
 
   /* ── Muted (secondary text, subdued backgrounds) ── */
-  --muted-l: oklch(0.94 0.02 265);
-  --muted-fg-l: oklch(0.5 0.06 265);
-  --muted-d: oklch(0.28 0.04 265);
-  --muted-fg-d: oklch(0.65 0.06 265);
+  --muted-l: oklch(0.94 0.01 50);
+  --muted-fg-l: oklch(0.5 0.03 50);
+  --muted-d: oklch(0.28 0.02 50);
+  --muted-fg-d: oklch(0.65 0.02 50);
 
-  /* ── Accent (hover states, highlights) ── */
-  --accent-l: oklch(0.94 0.03 265);
-  --accent-fg-l: oklch(0.35 0.15 265);
-  --accent-d: oklch(0.28 0.08 265);
-  --accent-fg-d: oklch(0.92 0.03 265);
+  /* ── Accent (hover states, highlights) — Green ── */
+  --accent-l: oklch(0.92 0.06 145);
+  --accent-fg-l: oklch(0.35 0.18 145);
+  --accent-d: oklch(0.25 0.08 145);
+  --accent-fg-d: oklch(0.88 0.06 145);
 
   /* ── Destructive (errors, delete actions) ── */
   --destructive-l: oklch(0.577 0.245 27.325);
   --destructive-d: oklch(0.704 0.191 22.216);
 
   /* ── Borders & inputs ── */
-  --border-l: oklch(0.922 0 0);
+  --border-l: oklch(0.92 0.01 50);
   --border-d: oklch(1 0 0 / 10%);
-  --input-l: oklch(0.922 0 0);
+  --input-l: oklch(0.92 0.01 50);
   --input-d: oklch(1 0 0 / 15%);
-  --ring-l: oklch(0.5 0.2 265);
-  --ring-d: oklch(0.6 0.18 265);
+  --ring-l: oklch(0.6 0.2 50);
+  --ring-d: oklch(0.72 0.18 50);
 
   /* ── Radius (shared) ── */
   --radius: 0.625rem;
@@ -89,21 +89,21 @@
   /* ── Sidebar ── */
   --sidebar-l: oklch(0.985 0 0);
   --sidebar-fg-l: oklch(0.145 0 0);
-  --sidebar-primary-l: oklch(0.45 0.22 265);
+  --sidebar-primary-l: oklch(0.6 0.2 50);
   --sidebar-primary-fg-l: oklch(0.985 0 0);
-  --sidebar-accent-l: oklch(0.94 0.03 265);
-  --sidebar-accent-fg-l: oklch(0.35 0.15 265);
-  --sidebar-border-l: oklch(0.922 0 0);
-  --sidebar-ring-l: oklch(0.5 0.2 265);
+  --sidebar-accent-l: oklch(0.92 0.06 145);
+  --sidebar-accent-fg-l: oklch(0.35 0.18 145);
+  --sidebar-border-l: oklch(0.92 0.01 50);
+  --sidebar-ring-l: oklch(0.6 0.2 50);
 
   --sidebar-d: oklch(0.205 0 0);
   --sidebar-fg-d: oklch(0.985 0 0);
-  --sidebar-primary-d: oklch(0.65 0.18 265);
+  --sidebar-primary-d: oklch(0.72 0.18 50);
   --sidebar-primary-fg-d: oklch(0.15 0 0);
-  --sidebar-accent-d: oklch(0.28 0.08 265);
-  --sidebar-accent-fg-d: oklch(0.92 0.03 265);
+  --sidebar-accent-d: oklch(0.25 0.08 145);
+  --sidebar-accent-fg-d: oklch(0.88 0.06 145);
   --sidebar-border-d: oklch(1 0 0 / 10%);
-  --sidebar-ring-d: oklch(0.6 0.18 265);
+  --sidebar-ring-d: oklch(0.72 0.18 50);
 }
 
 /* ============================================================
