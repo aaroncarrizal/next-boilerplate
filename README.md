@@ -29,6 +29,46 @@ Built for Spanish-language projects — but works for any locale.
 - **Prettier** — Consistent formatting with Tailwind class sorting
 - **ESLint** — Airbnb-inspired stylistic rules + Next.js/TypeScript best practices
 
+## Business Site Builder
+
+This boilerplate includes a `business-site-builder` agent skill for scaffolding business website pages one at a time. Each page is generated via conversation with the agent.
+
+### Setup per client
+
+1. **`lib/business.ts`** — set the business name, services offered, contact info
+2. **`lib/config.ts`** — set URL, locale, OG image path
+3. **`app/globals.css`** — set brand colors (edit the Brand Palette block only)
+
+The demo pages (Home, About, Contact) stay as examples — no need to delete them.
+
+### Workflow
+
+```
+"generate a services page"
+```
+
+The agent reads `lib/business.ts` for context, loads the skill, follows the relevant playbook, and creates:
+
+```
+app/services/page.tsx       # Server component with metadata + content
+app/services/loading.tsx    # Suspense fallback
+```
+
+Then it updates `navItems` in `components/layout/Header.tsx` to include the new page.
+
+For content-heavy pages (FAQ, mission, pricing, testimonials, team, gallery), the agent asks you what content to include before generating.
+
+### Available playbooks
+
+| Page type | Content source |
+|-----------|---------------|
+| index | Default page from template (replace on request) |
+| about | `businessConfig.description` + user input |
+| services | `businessConfig.services` array |
+| contact | `businessConfig` contact fields |
+| mission, faq, pricing, team, testimonials, gallery | User provides content via chat |
+| *(any other)* | User describes desired content |
+
 ## Getting Started
 
 ```bash
@@ -109,7 +149,7 @@ export const siteConfig = {
   url: "https://mydomain.com",
   locale: "es_ES",           // Change to your locale
   ogImage: "/opengraph-image",
-  links: {
+  socials: {
     twitter: "https://twitter.com/myhandle",
     github: "https://github.com/me/my-project",
   },

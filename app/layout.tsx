@@ -85,7 +85,7 @@ export default function RootLayout({
         <OrganizationJsonLd
           name={siteConfig.name}
           url={siteConfig.url}
-          sameAs={[siteConfig.links.twitter, siteConfig.links.github]}
+          sameAs={Object.values(siteConfig.socials)}
         />
         <WebSiteJsonLd
           name={siteConfig.name}

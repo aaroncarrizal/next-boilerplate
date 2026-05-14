@@ -8,6 +8,8 @@ import { siteConfig } from "@/lib/config"
 import { ThemeToggle } from "@/components/layout/ThemeToggle"
 import { BreadcrumbJsonLd } from "@/lib/json-ld"
 
+// Updated by the agent when generating new pages via the business-site-builder skill
+// Edit this array to add, remove, or reorder navigation links
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },

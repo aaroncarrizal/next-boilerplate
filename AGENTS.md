@@ -102,6 +102,7 @@ The `.agents/skills/` directory contains skills for:
 - **frontend-design** — high-quality frontend builds
 - **accessibility** — WCAG 2.2 compliance audits
 - **programmatic-seo** — scalable SEO page generation
+- **business-site-builder** — generating business website pages one at a time
 
 ## ESLint Config
 
@@ -120,4 +121,29 @@ Flat config in `eslint.config.mjs`. Layers:
 - Tailwind v4 `@theme inline` maps `--font-sans`, `--font-mono`, and `--font-heading` to `font-sans`, `font-mono`, `font-heading` utilities
 - To change fonts: swap the import in `layout.tsx`, update the variable names if needed
 - `lib/config.ts` has `fonts.sans` and `fonts.mono` for reference in OG images, etc.
+
+---
+
+# Business Site Builder
+
+This template can scaffold business website pages via the `business-site-builder` skill.
+
+## Setup per client
+
+1. Edit `lib/business.ts` — set the business name, description, services, contact info
+2. Edit `lib/config.ts` — set URL, locale, OG image path
+3. Edit `app/globals.css` — set brand colors (primary-l, primary-d, etc.)
+
+The demo pages (Home, About, Contact) stay in the template as examples.
+
+## Workflow
+
+When the user asks to generate a page (e.g., "generate a services page"), the agent:
+
+1. Reads `lib/business.ts` and `lib/config.ts` for context
+2. Loads the `business-site-builder` skill
+3. Follows the relevant playbook for that page type
+4. Creates `app/<type>/page.tsx` + `app/<type>/loading.tsx`
+5. Updates `navItems` in `components/layout/Header.tsx`
+6. Asks the user for input when the playbook has no default content (FAQ, mission, pricing, etc.)
 <!-- END:nextjs-agent-rules -->
