@@ -25,56 +25,56 @@
  * ============================================================ */
 :root {
   /* ── Background & text ── */
-  --bg-l: oklch(1 0 0);
-  --bg-fg-l: oklch(0.145 0 0);
-  --bg-d: oklch(0.145 0 0);
-  --bg-fg-d: oklch(0.985 0 0);
+  --bg-l: oklch(0.995 0 0);
+  --bg-fg-l: oklch(0.13 0.01 260);
+  --bg-d: oklch(0.12 0.015 270);
+  --bg-fg-d: oklch(0.96 0.005 270);
 
   --card-l: oklch(1 0 0);
-  --card-fg-l: oklch(0.145 0 0);
-  --card-d: oklch(0.205 0 0);
-  --card-fg-d: oklch(0.985 0 0);
+  --card-fg-l: oklch(0.13 0.01 260);
+  --card-d: oklch(0.16 0.01 270);
+  --card-fg-d: oklch(0.96 0.005 270);
 
   --popover-l: oklch(1 0 0);
-  --popover-fg-l: oklch(0.145 0 0);
-  --popover-d: oklch(0.205 0 0);
-  --popover-fg-d: oklch(0.985 0 0);
+  --popover-fg-l: oklch(0.13 0.01 260);
+  --popover-d: oklch(0.16 0.01 270);
+  --popover-fg-d: oklch(0.96 0.005 270);
 
-  /* ── Primary (buttons, links, active states) — Orange ── */
-  --primary-l: oklch(0.6 0.2 50);
+  /* ── Primary (buttons, links, active states) — Indigo ── */
+  --primary-l: oklch(0.48 0.18 268);
   --primary-fg-l: oklch(0.985 0 0);
-  --primary-d: oklch(0.72 0.18 50);
-  --primary-fg-d: oklch(0.15 0 0);
+  --primary-d: oklch(0.65 0.15 268);
+  --primary-fg-d: oklch(0.15 0.01 270);
 
-  /* ── Secondary (subtle buttons, tags) — Green ── */
-  --secondary-l: oklch(0.92 0.06 145);
-  --secondary-fg-l: oklch(0.35 0.18 145);
-  --secondary-d: oklch(0.25 0.08 145);
-  --secondary-fg-d: oklch(0.88 0.06 145);
+  /* ── Secondary (subtle buttons, tags) — Cool grey ── */
+  --secondary-l: oklch(0.9 0.025 265);
+  --secondary-fg-l: oklch(0.35 0.12 268);
+  --secondary-d: oklch(0.22 0.02 270);
+  --secondary-fg-d: oklch(0.72 0.12 268);
 
   /* ── Muted (secondary text, subdued backgrounds) ── */
-  --muted-l: oklch(0.94 0.01 50);
-  --muted-fg-l: oklch(0.5 0.03 50);
-  --muted-d: oklch(0.28 0.02 50);
-  --muted-fg-d: oklch(0.65 0.02 50);
+  --muted-l: oklch(0.945 0.008 265);
+  --muted-fg-l: oklch(0.52 0.02 265);
+  --muted-d: oklch(0.18 0.01 270);
+  --muted-fg-d: oklch(0.58 0.02 270);
 
-  /* ── Accent (hover states, highlights) — Green ── */
-  --accent-l: oklch(0.92 0.06 145);
-  --accent-fg-l: oklch(0.35 0.18 145);
-  --accent-d: oklch(0.25 0.08 145);
-  --accent-fg-d: oklch(0.88 0.06 145);
+  /* ── Accent (hover states, highlights) — Teal ── */
+  --accent-l: oklch(0.58 0.1 195);
+  --accent-fg-l: oklch(0.985 0 0);
+  --accent-d: oklch(0.68 0.08 195);
+  --accent-fg-d: oklch(0.15 0.01 270);
 
   /* ── Destructive (errors, delete actions) ── */
   --destructive-l: oklch(0.577 0.245 27.325);
   --destructive-d: oklch(0.704 0.191 22.216);
 
   /* ── Borders & inputs ── */
-  --border-l: oklch(0.92 0.01 50);
+  --border-l: oklch(0.91 0.015 265);
   --border-d: oklch(1 0 0 / 10%);
-  --input-l: oklch(0.92 0.01 50);
+  --input-l: oklch(0.91 0.015 265);
   --input-d: oklch(1 0 0 / 15%);
-  --ring-l: oklch(0.6 0.2 50);
-  --ring-d: oklch(0.72 0.18 50);
+  --ring-l: oklch(0.48 0.18 268);
+  --ring-d: oklch(0.65 0.15 268);
 
   /* ── Radius (shared) ── */
   --radius: 0.625rem;
@@ -88,22 +88,22 @@
 
   /* ── Sidebar ── */
   --sidebar-l: oklch(0.985 0 0);
-  --sidebar-fg-l: oklch(0.145 0 0);
-  --sidebar-primary-l: oklch(0.6 0.2 50);
+  --sidebar-fg-l: oklch(0.13 0.01 260);
+  --sidebar-primary-l: oklch(0.48 0.18 268);
   --sidebar-primary-fg-l: oklch(0.985 0 0);
-  --sidebar-accent-l: oklch(0.92 0.06 145);
-  --sidebar-accent-fg-l: oklch(0.35 0.18 145);
-  --sidebar-border-l: oklch(0.92 0.01 50);
-  --sidebar-ring-l: oklch(0.6 0.2 50);
+  --sidebar-accent-l: oklch(0.9 0.025 265);
+  --sidebar-accent-fg-l: oklch(0.35 0.12 268);
+  --sidebar-border-l: oklch(0.91 0.015 265);
+  --sidebar-ring-l: oklch(0.48 0.18 268);
 
-  --sidebar-d: oklch(0.205 0 0);
-  --sidebar-fg-d: oklch(0.985 0 0);
-  --sidebar-primary-d: oklch(0.72 0.18 50);
-  --sidebar-primary-fg-d: oklch(0.15 0 0);
-  --sidebar-accent-d: oklch(0.25 0.08 145);
-  --sidebar-accent-fg-d: oklch(0.88 0.06 145);
+  --sidebar-d: oklch(0.18 0.01 270);
+  --sidebar-fg-d: oklch(0.96 0.005 270);
+  --sidebar-primary-d: oklch(0.65 0.15 268);
+  --sidebar-primary-fg-d: oklch(0.15 0.01 270);
+  --sidebar-accent-d: oklch(0.22 0.02 270);
+  --sidebar-accent-fg-d: oklch(0.72 0.12 268);
   --sidebar-border-d: oklch(1 0 0 / 10%);
-  --sidebar-ring-d: oklch(0.72 0.18 50);
+  --sidebar-ring-d: oklch(0.65 0.15 268);
 }
 
 /* ============================================================
@@ -118,13 +118,13 @@
  *       font's CSS variable name in --font-heading (e.g., "var(--font-display)")
  * ============================================================ */
 :root {
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-sora);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-outfit);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-heading);
   --color-sidebar-ring: var(--sidebar-ring);

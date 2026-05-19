@@ -6,7 +6,7 @@ import type { Metadata, Viewport } from "next"
 //   3. For a separate heading font, add its CSS variable
 //      to <html> className and update --font-heading in globals.css
 // ─────────────────────────────────────────────────────
-import { Geist, Geist_Mono } from "next/font/google"
+import { Sora, Outfit, Geist_Mono } from "next/font/google"
 import { ThemeProvider } from "next-themes"
 
 import { siteConfig } from "@/lib/config"
@@ -15,8 +15,13 @@ import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import "./globals.css"
 
-const geistSans = Geist({
-  variable: "--font-sans",
+const sora = Sora({
+  variable: "--font-sora",
+  subsets: ["latin"],
+})
+
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
 })
 
@@ -73,7 +78,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${sora.variable} ${outfit.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">

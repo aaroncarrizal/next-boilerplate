@@ -10,7 +10,8 @@ export const siteConfig = {
     github: "https://github.com/example/next-boilerplate",
   },
   fonts: {
-    sans: "Geist",
+    sans: "Outfit",
     mono: "Geist Mono",
+    display: "Sora",
   },
 }

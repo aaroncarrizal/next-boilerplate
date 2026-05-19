@@ -4,35 +4,41 @@ export interface BusinessService {
 }
 
 export const businessConfig = {
-  name: "Café Sierra Azul",
+  name: "Next Boilerplate",
   description:
-    "Cafetería de especialidad en San Luis Potosí enfocada en café de origen mexicano, brunch artesanal y experiencias relajadas con diseño contemporáneo.",
-  tagline: "Buen café, mejores conversaciones.",
-  email: "hola@cafesierraazul.mx",
-  phone: "+52 444 312 8471",
-  address: "Av. Venustiano Carranza 1450, Col. Tequisquiapan, San Luis Potosí, S.L.P., México",
-  industry: "Cafetería / Hospitality",
-  vibe: "Moderno, cálido, minimalista, creativo y pet-friendly",
+    "Boilerplate moderno de Next.js para crear aplicaciones SaaS, plataformas web y productos impulsados por inteligencia artificial.",
+  tagline: "Construye más rápido. Escala de forma inteligente.",
+  email: "hola@nextboilerplate.dev",
+  phone: "+52 444 000 0000",
+  address: "San Luis Potosí, México",
+  industry: "Desarrollo de Software / SaaS con IA",
+  vibe: "Moderno, minimalista, escalable, enfocado en desarrolladores e impulsado por IA",
+
   services: [
     {
-      title: "Café de especialidad",
-      description: "Espresso, métodos filtrados y bebidas de temporada preparadas con granos mexicanos de origen.",
+      title: "Starter SaaS con IA",
+      description:
+        "Base lista para construir productos SaaS con autenticación, pagos, dashboards y herramientas de inteligencia artificial.",
     },
     {
-      title: "Brunch artesanal",
-      description: "Opciones frescas preparadas al momento, incluyendo chilaquiles, pan francés y bowls saludables.",
+      title: "Arquitectura Next.js",
+      description:
+        "Estructura optimizada con App Router, Server Actions, TypeScript y mejores prácticas modernas.",
     },
     {
-      title: "Espacio coworking",
-      description: "Área cómoda con WiFi de alta velocidad, enchufes y ambiente tranquilo para trabajar o estudiar.",
+      title: "Autenticación y pagos",
+      description:
+        "Integración rápida con proveedores de autenticación, Stripe, suscripciones y gestión de usuarios.",
     },
     {
-      title: "Eventos privados",
-      description: "Reservaciones para reuniones, talleres y celebraciones pequeñas con servicio personalizado.",
+      title: "Componentes reutilizables",
+      description:
+        "Sistema de componentes reutilizables con Tailwind CSS, diseño responsive y enfoque escalable.",
     },
     {
-      title: "Coffee catering",
-      description: "Barra móvil de café para eventos corporativos, bodas y activaciones de marca.",
+      title: "Integración de agentes de IA",
+      description:
+        "Conecta agentes de IA, automatizaciones y APIs modernas para acelerar el desarrollo.",
     },
   ] as BusinessService[],
 }
